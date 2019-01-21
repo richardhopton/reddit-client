@@ -1,6 +1,7 @@
 export const CHOOSE_SUBREDDIT = "CHOOSE_SUBREDDIT";
 export const LOAD_POSTS = "LOAD_POSTS";
 export const PARSE_POSTS = "PARSE_POSTS";
+export const GOTO_PAGE = "GOTO_PAGE";
 
 export const chooseSubreddit = subreddit => ({
   type: CHOOSE_SUBREDDIT,
@@ -19,9 +20,12 @@ const parsePosts = (subreddit, postsJson) => ({
   lastUpdated: Date.now()
 });
 
-const actualFetchPosts = subreddit => dispatch => {
+const actualFetchPosts = (subreddit, page) => dispatch => {
   dispatch(loadPosts(subreddit));
-  return fetch(`https://www.reddit.com/r/${subreddit}.json?count=25`)
+  const pagination = !page || page == "" ? "" : `&after=${page}`;
+  return fetch(
+    `https://www.reddit.com/r/${subreddit}.json?count=25${pagination}`
+  )
     .then(response => response.json())
     .then(json => dispatch(parsePosts(subreddit, json)));
 };
@@ -36,3 +40,9 @@ export const fetchPosts = subreddit => (dispatch, getState) => {
     return dispatch(actualFetchPosts(subreddit));
   }
 };
+
+export const gotoPage = (subreddit, page) => ({
+  type: GOTO_PAGE,
+  subreddit,
+  page
+});

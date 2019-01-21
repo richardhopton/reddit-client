@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { chooseSubreddit, fetchPosts } from "../actions";
+import { chooseSubreddit, fetchPosts, gotoPage } from "../actions";
 import Posts from "./Posts";
 import styles from "./styles.css";
 
@@ -14,10 +14,21 @@ export class Subreddit extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { dispatch, subreddit } = this.props;
-    if (prevProps.subreddit === subreddit) return;
+    const { dispatch, subreddit, page } = this.props;
+    if (prevProps.subreddit === subreddit && prevProps.page === page) return;
 
-    dispatch(fetchPosts(subreddit));
+    dispatch(fetchPosts(subreddit, page));
+  }
+
+  onGotoFirstPageClick() {
+    const { dispatch, subreddit } = this.props;
+    dispatch(gotoPage(subreddit, ""));
+  }
+
+  onGotoNextPageClick() {
+    const { dispatch, subreddit, posts } = this.props;
+    const { name: page } = posts[posts.length - 1];
+    dispatch(gotoPage(subreddit, page));
   }
 
   render() {
@@ -25,6 +36,20 @@ export class Subreddit extends Component {
     return (
       <div className={styles.subreddit}>
         <div className={styles.header}>
+          <div className={styles.pagination}>
+            <button
+              className={styles.paginationButton}
+              onClick={this.onGotoFirstPageClick.bind(this)}
+            >
+              First Page
+            </button>
+            <button
+              className={styles.paginationButton}
+              onClick={this.onGotoNextPageClick.bind(this)}
+            >
+              Next Page
+            </button>
+          </div>
           <div className={styles.headerName}>{subreddit}</div>
           {lastUpdated && (
             <div className={styles.lastUpdated}>
@@ -44,6 +69,7 @@ export class Subreddit extends Component {
 
 Subreddit.propTypes = {
   subreddit: PropTypes.string.isRequired,
+  page: PropTypes.string.isRequired,
   posts: PropTypes.array.isRequired,
   isLoading: PropTypes.bool.isRequired,
   lastUpdated: PropTypes.number,
@@ -51,14 +77,16 @@ Subreddit.propTypes = {
 };
 
 function mapState(state) {
-  const { subreddit, posts } = state;
+  const { subreddit, posts, pagination } = state;
   const { isLoading, lastUpdated, items } = posts[subreddit] || {
     isLoading: true,
     items: []
   };
+  const page = pagination[subreddit] || "";
 
   return {
     subreddit,
+    page,
     posts: items,
     isLoading,
     lastUpdated

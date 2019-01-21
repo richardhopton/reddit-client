@@ -50,3 +50,14 @@ describe("fetchPosts action", () => {
     });
   });
 });
+
+test("gotPage action should produce expected result", () => {
+  const action = actions.gotoPage("news", "page2");
+
+  const expected = {
+    type: actions.GOTO_PAGE,
+    subreddit: "news",
+    page: "page2"
+  };
+  expect(action).toEqual(expected);
+});

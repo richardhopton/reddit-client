@@ -2,6 +2,9 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.subreddit {
+}
+
 .header {
   display: block;
   padding: 1rem;
@@ -20,6 +23,9 @@
   font-weight: 500;
 }
 
+.lastUpdated {
+}
+
 .body {
   margin-top: 6rem;
 }
@@ -27,4 +33,13 @@
 .picker {
   display: inline-block;
   margin-right: .5rem;
+}
+
+.pagination {
+  float: right;
+}
+
+.paginationButton {
+  display: block;
+  margin-top: .25rem;
 }
