@@ -30,6 +30,50 @@
   margin-top: 6rem;
 }
 
+.post {
+  margin-top: 0.75rem;
+  color: rgb(135, 138, 140);
+  cursor: pointer;
+  fill: rgb(135, 138, 140);
+  overflow: hidden;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(204, 204, 204);
+  padding: 0.5rem;
+}
+
+.author {
+  color: rgb(120, 124, 126);
+  float: right;
+}
+
+.thumbnail {
+  float: left;
+  margin-right: 0.5rem;
+}
+
+.thumbnailImage {
+  width: 6rem;
+  height: 6rem;
+}
+
+.title {
+  margin-top: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.score {
+
+}
+
+.postText {
+
+}
+
+.comments {
+
+}
+
 .picker {
   display: inline-block;
   margin-right: .5rem;

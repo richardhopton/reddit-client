@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders expected snapshot 1`] = `
+<div
+  className="post"
+>
+  <div
+    className="thumbnail"
+  >
+    <img
+      className="thumbnailImage"
+      onError={[Function]}
+    />
+  </div>
+  <div
+    className="postText"
+  >
+    <div
+      className="author"
+    >
+      Submitted by:
+       
+      <a
+        href="//www.reddit.com/user/user1"
+      >
+        user1
+      </a>
+    </div>
+    <div
+      className="score"
+    >
+      Score: 
+      1
+    </div>
+    <div
+      className="title"
+    >
+      <a
+        href="//www.reddit.comhttp://1"
+        target="_blank"
+      >
+        1
+      </a>
+    </div>
+    <div
+      className="comments"
+    >
+      <a
+        href="//www.reddit.comhttp://1"
+        target="_blank"
+      >
+        1 comments
+      </a>
+    </div>
+  </div>
+</div>
+`;

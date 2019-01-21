@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Post from "./Post";
 
 export default class Posts extends Component {
   render() {
     return (
       <div>
-        {this.props.posts.map((post, i) => (
-          <div key={i}>{post.title}</div>
+        {this.props.posts.map(post => (
+          <Post key={post.id} {...post} />
         ))}
       </div>
     );
