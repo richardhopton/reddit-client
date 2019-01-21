@@ -13,5 +13,15 @@ exports[`Subreddit renders expected snapshot 1`] = `
       oddlysatisfying
     </div>
   </div>
+  <div
+    className="body"
+  >
+    <div>
+      1
+    </div>
+    <div>
+      2
+    </div>
+  </div>
 </div>
 `;
