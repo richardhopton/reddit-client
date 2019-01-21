@@ -17,10 +17,12 @@ exports[`Subreddit renders expected snapshot 1`] = `
     className="body"
   >
     <div>
-      1
-    </div>
-    <div>
-      2
+      <div>
+        1
+      </div>
+      <div>
+        2
+      </div>
     </div>
   </div>
 </div>

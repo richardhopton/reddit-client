@@ -1,5 +1,5 @@
 import reducer from "../posts";
-import { PARSE_POSTS } from "../../actions";
+import * as actions from "../../actions";
 
 describe("posts reducer", () => {
   it("should return default when called without known type", () => {
@@ -10,11 +10,24 @@ describe("posts reducer", () => {
     const date = Date.now();
     expect(
       reducer("", {
-        type: PARSE_POSTS,
+        type: actions.PARSE_POSTS,
         subreddit: "news",
         posts: ["1", "2"],
         lastUpdated: date
       })
-    ).toEqual({ news: { items: ["1", "2"], lastUpdated: date } });
+    ).toEqual({
+      news: { isLoading: false, items: ["1", "2"], lastUpdated: date }
+    });
+  });
+
+  it("should handle LOAD_POSTS action", () => {
+    expect(
+      reducer("", {
+        type: actions.LOAD_POSTS,
+        subreddit: "news"
+      })
+    ).toEqual({
+      news: { isLoading: true, items: [] }
+    });
   });
 });

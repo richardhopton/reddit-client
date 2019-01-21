@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { chooseSubreddit, fetchPosts } from "../actions";
+import Posts from "./Posts";
 import styles from "./styles.css";
 
 export class Subreddit extends Component {
@@ -20,7 +21,7 @@ export class Subreddit extends Component {
   }
 
   render() {
-    const { subreddit, posts, lastUpdated } = this.props;
+    const { subreddit, posts, isLoading, lastUpdated } = this.props;
     return (
       <div className={styles.subreddit}>
         <div className={styles.header}>
@@ -32,12 +33,9 @@ export class Subreddit extends Component {
           )}
         </div>
         <div className={styles.body}>
-          {posts.length === 0 && <h2>Empty.</h2>}
-          {posts.length > 0 && posts.map((post,i) => (
-            <div key={i}>
-              {post.title}
-            </div>
-          ))}
+          {isLoading && posts.length === 0 && <h2>Loading...</h2>}
+          {!isLoading && posts.length === 0 && <h2>Empty.</h2>}
+          {posts.length > 0 && <Posts posts={posts} />}
         </div>
       </div>
     );
@@ -47,19 +45,22 @@ export class Subreddit extends Component {
 Subreddit.propTypes = {
   subreddit: PropTypes.string.isRequired,
   posts: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   lastUpdated: PropTypes.number,
   dispatch: PropTypes.func.isRequired
 };
 
 function mapState(state) {
   const { subreddit, posts } = state;
-  const { lastUpdated, items } = posts[subreddit] || {
+  const { isLoading, lastUpdated, items } = posts[subreddit] || {
+    isLoading: true,
     items: []
   };
 
   return {
     subreddit,
     posts: items,
+    isLoading,
     lastUpdated
   };
 }

@@ -7,6 +7,7 @@ import { CHOOSE_SUBREDDIT } from "../../actions";
 const props = {
   subreddit: "oddlysatisfying",
   posts: [{ title: "1" }, { title: "2" }],
+  isLoading: false,
   dispatch: () => {}
 };
 
