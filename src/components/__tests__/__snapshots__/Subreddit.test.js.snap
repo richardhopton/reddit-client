@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Subreddit renders expected snapshot 1`] = `
+<div
+  className="subreddit"
+>
+  <div
+    className="header"
+  >
+    <div
+      className="headerName"
+    >
+      oddlysatisfying
+    </div>
+  </div>
+</div>
+`;
