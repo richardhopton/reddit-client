@@ -17,7 +17,15 @@ export class Subreddit extends Component {
     const { dispatch, subreddit, page } = this.props;
     if (prevProps.subreddit === subreddit && prevProps.page === page) return;
 
+    clearInterval(this.interval);
     dispatch(fetchPosts(subreddit, page));
+    this.interval = setInterval(() => {
+      dispatch(fetchPosts(subreddit, page));
+    }, 60000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   onGotoFirstPageClick() {
